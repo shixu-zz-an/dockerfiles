@@ -1,0 +1,17 @@
+FROM main_ops:latest
+
+# 确保 pip 也升级到最新版本
+RUN python3 -m pip install --upgrade pip
+# 安装 LangChain 和相关依赖
+RUN pip3 install langchain requests
+
+# 创建工作目录
+WORKDIR /app
+
+# 复制运行脚本
+COPY langchain_service.py /app/langchain_service.py
+
+# 暴露服务端口
+EXPOSE 7000
+
+CMD ["python3", "/app/langchain_service.py"]
